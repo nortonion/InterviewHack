@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "trojanhacks-2019",
+  "private_key_id": "1492a0bcbd4b88aa484d7158b58bab0abe3dc577",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCum/b9Hnb5qmB6\nwB3f6cwKUJ1tFW1kevcCKleUpM9YbIpBVjQsvi27mfzSOcdKMdqzyLQyADqbYUCI\naWXZxqnUeXabPLlf8jBhAcaoayM90xseH4mapffgng0SUvUrURA5/wGAklQ/f2jD\nAz3B70o2ttl9udqWJ9/vmN8zahy7f7AaDgXctDrdnvtiJ79UdG+Sr+n3EiLMMGKO\ndZ1Z9AOYIW5AOgYKfbnep5j1HfgnDIUTJKZ7HZKvym/vmLm5Myva7OQWnk1QCPwe\nfM/Oemy2pjBbjWEhz7gC+41d+u2x9azsLwLdk3QEFuq7uiz88KcpTslrG8AV5/Bp\nqijju4oBAgMBAAECggEADc+yplQi8U3pnoAEhO39eJnmj+a0XdCvqd1PSufL6ljA\niVlAHINpAugz5C2TjtH5dIPVRAi6WgjD5d5fYu3YyGCYsgAIQjd6Hew56l+6HIVu\npU/1jpTe8eaSjl7fO29Iryu1ctXwQcsKTnWazJSozEHjm3MoX/z0tMMk8ZBMyERY\nKV1zfneoI+GKhhHBlAawO/Nm9WaKDLlqOVYxCAKMwUQIMAXSXkY9dYXdH8WcbR5i\niOEZigIiYQ0jFfKq6JEC5t+qWVaNuTHYPByg3HphXxjgmPcHLqG/j3aMPT8WPYQL\n1sb6be8psQZ9mpi3OZXpdEgsSU7/KA4pdaLRLENIyQKBgQD1JZWwy4wdKx+3Iz/u\nx6mw+QYBiICS0+7Dh/qXFtrQ9HKFsjFhwLkams+3buM2Bf6cOdM7IxO0bknYaYQk\nO5qxFPJYHlXUvT/k/8y6FCvdWpNJkNTFEaXVUK5kWuNGVdITAJRtC63MNmVE43WE\ntKQDAMQHqCcdQFJdP+S59Q2aiQKBgQC2Vu4IkCJApZfCcNsadSLhx4dILbP0Xdc9\nDC0dkt4yFjV4MpMFVcs6YRTFLWz3PhU3jDE4B1fFS6TLvjenUz2T5ZyoLiQb6rqM\n3AOTbE4vSM1ES7Y89EV0+s3R6kqvvnLCK7aTYTX3TWKzhqhoyNbEHM6bZCMKR1fI\nUpRcgIS1uQKBgBhsGyKW1KmfPzSehWMDbytbU7bZY329MV83b8aXl0sT30jkfLjx\nWz+ERsdOe8JJDJmBxUJx9yeViTPPJ0P40CtuG8qdkw1zoSbuOPYcxlXyDRRaImhT\nnsLGm+kRiOzb5ebQuvi2HiVnEeWwB2gmGuTVsbHVlbf7TXlOwTmpaSaJAoGAcbc1\nLFH3iqm7Q6BuhMmYv4ZYcENQf44mtgPp/w+hU0tWfWfNGP6wh/ATrATweCFXyhS8\nfVzW+Ex8sjQnMUtQk/QXByv/iQmS3lY4RLC+8e5NVdKCDPGqf5IK2mdrvL7hgwcQ\nDkoKBflVHPFWBkN67UOp9m81CywDKwOVUzsziMECgYEAvYwOGery4Dq0nmlD1hUH\nJcpe17bIYCZBdcORoRkrs02VwM+0U0g8okmaB2/oFI4NQINfe45Lbe9Ifl4fcQ3E\nTTWD7o0LSx1h5GbklHpQBKZMRe7qxlX0lL/3A4Pqhx4xRtjWKuhh2vRNEABIjNLn\na4RKOo+5fN2ElRgGy4V7AqY=\n-----END PRIVATE KEY-----\n",
+  "client_email": "trojanhacks19@trojanhacks-2019.iam.gserviceaccount.com",
+  "client_id": "117876221784118411263",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/trojanhacks19%40trojanhacks-2019.iam.gserviceaccount.com"
+}
