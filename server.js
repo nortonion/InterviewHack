@@ -25,6 +25,9 @@ app.use((req, res, next) => {
 
 // GCP API
 app.use("/api", api);
+app.get("/", (req, res) => {
+  res.send({ msg: "Hello World" });
+});
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log("Running Server at " + port));
