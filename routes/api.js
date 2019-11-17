@@ -67,7 +67,7 @@ router.get("/get_image", (req, res) => {
 
 router.post("/upload", (req, res) => {
   //res.send({ hello: "world" });
-  JSON;
+
   Image.remove({}, () => {
     let image = new Image(JSON.stringify(req.body));
     image
