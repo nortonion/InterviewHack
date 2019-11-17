@@ -69,6 +69,7 @@ router.get("/get_image", (req, res) => {
 
 router.post("/upload", (req, res) => {
   //res.send({ hello: "world" });
+  var formData = req.body;
   var blob = formData.get("data");
   var reader = new FileReader();
   reader.readAsDataURL(blob);
