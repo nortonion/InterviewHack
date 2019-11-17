@@ -73,7 +73,7 @@ router.post("/upload", (req, res) => {
     image
       .save()
       .then(new_image => {
-        require("fs").writeFile("out.png", req.body, "base64", function(err) {
+        require("fs").writeFile("out.jpg", req.body, "base64", function(err) {
           console.log(err);
         });
 
