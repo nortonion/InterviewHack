@@ -34,7 +34,7 @@ router.get("/", async (req, res) => {
           const vision = require("@google-cloud/vision");
           const client = new vision.ImageAnnotatorClient();
           var stream = "output";
-          const fileName = path.join(__dirname, "out.jpg");
+          const fileName = "out.jpg";
           const [result] = await client.documentTextDetection(fileName);
           const fullTextAnnotation = result.fullTextAnnotation;
           console.log(`Full text: ${fullTextAnnotation.text}`);
@@ -151,10 +151,13 @@ router.get("/get_image", (req, res) => {
         res.status(200).send(err);
       }
       if (saved_image) {
+        var fd = fs.openSync("out.jpg", "w");
+
         require("fs").writeFile("out.jpg", saved_image.data, "base64", function(
           err
         ) {
           console.log(err);
+          res.status(200).send({ msg: "success" });
         });
       } else {
         res.status(200).send({ msg: "empty" });
