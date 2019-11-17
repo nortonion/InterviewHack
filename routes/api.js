@@ -70,7 +70,7 @@ router.get("/get_image", (req, res) => {
 router.post("/upload", (req, res) => {
   //res.send({ hello: "world" });
 
-  let image = new Image("assaass");
+  let image = new Image({ data: JSON.stringify(req.body) });
   image
     .save()
     .then(new_image => res.status(200).json(new_image))
