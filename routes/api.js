@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Image = require("../schemas/Image");
 const path = require("path");
-var multer = require("multer");
+//var multer = require("multer");
 var upload = multer({ dest: "uploads/" });
 
 /*
@@ -69,7 +69,7 @@ router.get("/get_image", (req, res) => {
     });
 });
 
-router.post("/upload", upload.single("data"), (req, res) => {
+router.post("/upload", (req, res) => {
   //res.send({ hello: "world" });
   //var formData = req.body;
   console.log(req.body);
