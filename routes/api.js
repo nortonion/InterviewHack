@@ -48,117 +48,121 @@ router.get("/:language", async (req, res) => {
           const client = new vision.ImageAnnotatorClient();
           var stream = "output";
           const fileName = "out.jpg";
+          try {
+            const [result] = await client.documentTextDetection(fileName);
+            const fullTextAnnotation = result.fullTextAnnotation;
+            console.log(`Full text: ${fullTextAnnotation.text}`);
 
-          const [result] = await client.documentTextDetection(fileName);
-          const fullTextAnnotation = result.fullTextAnnotation;
-          console.log(`Full text: ${fullTextAnnotation.text}`);
-
-          //python
-          var codes;
-          codes = fullTextAnnotation.text;
-          var i;
-          for (i = 0; i < codes.length; i++) {
-            if (codes[i] == "_") {
-              codes[i] = "\t";
-            }
-          }
-
-          // Submission/Compile
-          var submissionData = {
-            compilerId: ID,
-            source: codes //fullTextAnnotation.text
-          };
-
-          // send request
-          request(
-            {
-              url:
-                "https://" +
-                endpoint +
-                "/api/v4/submissions?access_token=" +
-                accessToken,
-              method: "POST",
-              form: submissionData
-            },
-            function(error, response, body) {
-              if (error) {
-                console.log("Connection problem");
+            //python
+            var codes;
+            codes = fullTextAnnotation.text;
+            var i;
+            for (i = 0; i < codes.length; i++) {
+              if (codes[i] == "_") {
+                codes[i] = "\t";
               }
+            }
 
-              // process response
-              if (response) {
-                if (response.statusCode === 201) {
-                  var submissionId = JSON.parse(response.body).id; // submission data in JSON
-                  console.log(submissionId);
-                  sleep.sleep(5);
-                  // send request
-                  request(
-                    {
-                      url:
-                        "https://" +
-                        endpoint +
-                        "/api/v4/submissions/" +
-                        submissionId +
-                        "/" +
-                        stream +
-                        "?access_token=" +
-                        accessToken,
-                      method: "GET"
-                    },
-                    function(error, response, body) {
-                      if (error) {
-                        console.log("Connection problem");
-                      }
+            // Submission/Compile
+            var submissionData = {
+              compilerId: ID,
+              source: codes //fullTextAnnotation.text
+            };
 
-                      // process response
-                      if (response) {
-                        if (response.statusCode === 200) {
-                          res.send({ msg: response.body });
-                        } else {
-                          if (response.statusCode === 401) {
-                            console.log("Invalid access token");
-                          } else if (response.statusCode === 403) {
-                            console.log("Access denied");
-                          } else if (response.statusCode === 404) {
-                            var body = JSON.parse(response.body);
-                            console.log(
-                              "Non existing resource, error code: " +
-                                body.error_code +
-                                ", details available in the message: " +
-                                body.message
-                            );
-                          } else if (response.statusCode === 400) {
-                            var body = JSON.parse(response.body);
-                            console.log(
-                              "Error code: " +
-                                body.error_code +
-                                ", details available in the message: " +
-                                body.message
-                            );
+            // send request
+            request(
+              {
+                url:
+                  "https://" +
+                  endpoint +
+                  "/api/v4/submissions?access_token=" +
+                  accessToken,
+                method: "POST",
+                form: submissionData
+              },
+              function(error, response, body) {
+                if (error) {
+                  console.log("Connection problem");
+                }
+
+                // process response
+                if (response) {
+                  if (response.statusCode === 201) {
+                    var submissionId = JSON.parse(response.body).id; // submission data in JSON
+                    console.log(submissionId);
+                    sleep.sleep(5);
+                    // send request
+                    request(
+                      {
+                        url:
+                          "https://" +
+                          endpoint +
+                          "/api/v4/submissions/" +
+                          submissionId +
+                          "/" +
+                          stream +
+                          "?access_token=" +
+                          accessToken,
+                        method: "GET"
+                      },
+                      function(error, response, body) {
+                        if (error) {
+                          console.log("Connection problem");
+                        }
+
+                        // process response
+                        if (response) {
+                          if (response.statusCode === 200) {
+                            console.log(response.body);
+                            res.send({ msg: response.body });
+                          } else {
+                            if (response.statusCode === 401) {
+                              console.log("Invalid access token");
+                            } else if (response.statusCode === 403) {
+                              console.log("Access denied");
+                            } else if (response.statusCode === 404) {
+                              var body = JSON.parse(response.body);
+                              console.log(
+                                "Non existing resource, error code: " +
+                                  body.error_code +
+                                  ", details available in the message: " +
+                                  body.message
+                              );
+                            } else if (response.statusCode === 400) {
+                              var body = JSON.parse(response.body);
+                              console.log(
+                                "Error code: " +
+                                  body.error_code +
+                                  ", details available in the message: " +
+                                  body.message
+                              );
+                            }
+                            res.status(200).send({ msg: "Compilation error" });
                           }
-                          res.status(200).send({ msg: "Compilation error" });
                         }
                       }
-                    }
-                  );
-                } else {
-                  if (response.statusCode === 401) {
-                    console.log("Invalid access token");
-                  } else if (response.statusCode === 402) {
-                    console.log("Unable to create submission");
-                  } else if (response.statusCode === 400) {
-                    var body = JSON.parse(response.body);
-                    console.log(
-                      "Error code: " +
-                        body.error_code +
-                        ", details available in the message: " +
-                        body.message
                     );
+                  } else {
+                    if (response.statusCode === 401) {
+                      console.log("Invalid access token");
+                    } else if (response.statusCode === 402) {
+                      console.log("Unable to create submission");
+                    } else if (response.statusCode === 400) {
+                      var body = JSON.parse(response.body);
+                      console.log(
+                        "Error code: " +
+                          body.error_code +
+                          ", details available in the message: " +
+                          body.message
+                      );
+                    }
                   }
                 }
               }
-            }
-          );
+            );
+          } catch (error) {
+            res.status(200).send({ msg: "The image is invalid" });
+          }
         });
       } else {
         res.status(200).send({ msg: "empty" });
