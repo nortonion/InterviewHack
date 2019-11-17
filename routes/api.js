@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const Image = require("../schemas/Image");
 const path = require("path");
+var multer = require("multer");
+var upload = multer({ dest: "uploads/" });
 
 /*
 router.get("/", async (req, res) => {
@@ -67,10 +69,11 @@ router.get("/get_image", (req, res) => {
     });
 });
 
-router.post("/upload", (req, res) => {
+router.post("/upload", upload.single("data"), (req, res) => {
   //res.send({ hello: "world" });
-  var formData = req.body;
-  console.log(formData);
+  //var formData = req.body;
+  console.log(req.body);
+  console.log(req.file);
   /*
   var blob = formData.get("data");
   var reader = new FileReader();
