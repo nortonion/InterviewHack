@@ -7,7 +7,13 @@ const mongoose = require("mongoose");
 //const image = require("./routes/image");
 
 //MiddleWare
-app.use(bodyParse.urlencoded({ extended: false }));
+app.use(
+  bodyParse.urlencoded({
+    parameterLimit: 100000,
+    limit: "50mb",
+    extended: true
+  })
+);
 app.use(bodyParse.json());
 app.use(morgan("dev"));
 
