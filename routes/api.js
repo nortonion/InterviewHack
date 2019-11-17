@@ -15,7 +15,7 @@ router.get("/", async (req, res) => {
   const vision = require("@google-cloud/vision");
   const client = new vision.ImageAnnotatorClient();
   var stream = "output";
-  const fileName = path.join(__dirname, "out.jpg");
+  const fileName = path.join(__dirname, "test.jpg");
   const [result] = await client.documentTextDetection(fileName);
   const fullTextAnnotation = result.fullTextAnnotation;
   console.log(`Full text: ${fullTextAnnotation.text}`);
@@ -141,7 +141,7 @@ router.post("/upload", (req, res) => {
       .save()
       .then(new_image => {
         require("fs").writeFile("out.jpg", req.body, "base64", function(err) {
-          console.log(err);
+          console.log("error ?");
         });
 
         res.status(200).json({ msg: "success" });
