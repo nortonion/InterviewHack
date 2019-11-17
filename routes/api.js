@@ -69,12 +69,16 @@ router.get("/get_image", (req, res) => {
 
 router.post("/upload", (req, res) => {
   //res.send({ hello: "world" });
-
-  let image = new Image({ data: typeof req.body });
-  image
-    .save()
-    .then(new_image => res.status(200).json(new_image))
-    .catch(err => res.status(404).send(err));
+  var blob = formData.get("data");
+  var reader = new FileReader();
+  reader.readAsDataURL(blob);
+  reader.onloadend = function() {
+    let image = new Image({ data: base64data });
+    image
+      .save()
+      .then(new_image => res.status(200).json(new_image))
+      .catch(err => res.status(404).send(err));
+  };
 });
 
 router.post("/", (req, res) => {});
