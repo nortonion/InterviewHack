@@ -1,5 +1,6 @@
 # InterviewHack
 Trojan Hack Fall 2019 project
+# Devpost: https://trojanhacks-fall-2019.devpost.com/ 
 
 This project is made by the following people: Duy Nguyen, Ellie, Norton Kishi, Qingyuan Li
 
