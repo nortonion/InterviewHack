@@ -54,19 +54,19 @@ router.get("/:language", async (req, res) => {
             console.log(`Full text: ${fullTextAnnotation.text}`);
 
             //python
-            var codes;
+            /*var codes;
             codes = fullTextAnnotation.text;
             var i;
             for (i = 0; i < codes.length; i++) {
-              if (codes[i] == "_") {
+              if (codes[i] == "*" && ID == 116) {
                 codes[i] = "\t";
               }
-            }
+            }*/
 
             // Submission/Compile
             var submissionData = {
               compilerId: ID,
-              source: codes //fullTextAnnotation.text
+              source: fullTextAnnotation.text
             };
 
             // send request
