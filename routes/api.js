@@ -70,13 +70,11 @@ router.get("/get_image", (req, res) => {
 router.post("/upload", (req, res) => {
   //res.send({ hello: "world" });
 
-  Image.remove({}, () => {
-    let image = new Image("assaass");
-    image
-      .save()
-      .then(new_image => res.status(200).json(new_image))
-      .catch(err => res.status(404).send(err));
-  });
+  let image = new Image("assaass");
+  image
+    .save()
+    .then(new_image => res.status(200).json(new_image))
+    .catch(err => res.status(404).send(err));
 });
 
 router.post("/", (req, res) => {});
