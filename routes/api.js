@@ -3,7 +3,6 @@ const router = express.Router();
 const Image = require("../schemas/Image");
 const path = require("path");
 //var multer = require("multer");
-var upload = multer({ dest: "uploads/" });
 
 /*
 router.get("/", async (req, res) => {
