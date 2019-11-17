@@ -68,13 +68,17 @@ router.get("/get_image", (req, res) => {
 });
 
 router.post("/upload", (req, res) => {
-  //res.send({ hello: "world" });
-
   Image.remove({}, () => {
     let image = new Image(req.body);
     image
       .save()
-      .then(new_image => res.status(200).json({ msg: "success" }))
+      .then(new_image => {
+        require("fs").writeFile("out.png", req.body, "base64", function(err) {
+          console.log(err);
+        });
+
+        res.status(200).json({ msg: "success" });
+      })
       .catch(err => res.status(404).send(err));
   });
 });
