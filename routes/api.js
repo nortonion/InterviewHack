@@ -58,8 +58,8 @@ router.get("/:language", async (req, res) => {
           codes = fullTextAnnotation.text;
           var i;
           for (i = 0; i < codes.length; i++) {
-            if (code[i] == "_") {
-              code[i] = "\t";
+            if (codes[i] == "_") {
+              codes[i] = "\t";
             }
           }
 
