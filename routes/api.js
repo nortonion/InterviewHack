@@ -22,7 +22,7 @@ router.get("/:language", async (req, res) => {
   } else if (language == "Javascript") {
     ID = 56;
   } else if (language == "Python") {
-    ID = 99;
+    ID = 116;
   }
   Image.findOne()
     .sort({ date: -1 })
