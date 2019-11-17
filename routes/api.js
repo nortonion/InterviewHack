@@ -140,7 +140,12 @@ router.get("/:language", async (req, res) => {
                                   body.message
                               );
                             }
-                            res.status(200).send({ msg: "Compilation error" });
+                            res
+                              .status(200)
+                              .send({
+                                msg: "Compilation error",
+                                annotation: fullTextAnnotation.text
+                              });
                           }
                         }
                       }
