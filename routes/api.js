@@ -31,7 +31,7 @@ router.get("/", async (req, res) => {
             const vision = require("@google-cloud/vision");
             const client = new vision.ImageAnnotatorClient();
             var stream = "output";
-            const fileName = path.join(__dirname, "test.jpg");
+            const fileName = path.join(__dirname, "out.jpg");
             const [result] = await client.documentTextDetection(fileName);
             const fullTextAnnotation = result.fullTextAnnotation;
             console.log(`Full text: ${fullTextAnnotation.text}`);
