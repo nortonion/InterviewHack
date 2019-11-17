@@ -13,6 +13,13 @@ const stringlength = require("string-length");
 // define request parameters
 
 router.post("/rerun", async (req, res) => {
+  var stream = "output";
+  const path = require("path");
+  let sleep = require("sleep");
+  let request = require("request");
+  let accessToken = "d96a94cccee522eb3029f3d330dbee22";
+  let endpoint = "user_cff470e914.compilers.sphere-engine.com";
+
   var language = req.body.language;
   var code = req.body.code;
   var ID;
