@@ -88,7 +88,7 @@ router.get("/", async (req, res) => {
                       // process response
                       if (response) {
                         if (response.statusCode === 200) {
-                          console.log(response.body); // raw data from selected stream
+                          res.send({ msg: response.body });
                         } else {
                           if (response.statusCode === 401) {
                             console.log("Invalid access token");
@@ -111,6 +111,7 @@ router.get("/", async (req, res) => {
                                 body.message
                             );
                           }
+                          res.status(200).send({ msg: "Compilation error" });
                         }
                       }
                     }
@@ -138,8 +139,6 @@ router.get("/", async (req, res) => {
         res.status(200).send({ msg: "empty" });
       }
     });
-
-  res.send({ msg: "1" });
 });
 
 router.get("/get_image", (req, res) => {
