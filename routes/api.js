@@ -15,18 +15,20 @@ router.get("/", async (req, res) => {
   Image.findOne()
     .sort({ date: -1 })
     .limit(1)
-    .exec(function(err, saved_image) {
+    .exec(async (err, saved_image) => {
       if (err) {
         res.status(200).send(err);
       }
       // IF there is image in DB
       if (saved_image) {
         // Create empty out.jpg
-        var fd = fs.openSync("out.jpg", 'w');
+        var fd = fs.openSync("out.jpg", "w");
         // Write to that empty out.jpg the image stored in DB
-        require("fs").writeFile("out.jpg", saved_image.data, "base64", function(
-          err
-        ) {
+        require("fs").writeFile(
+          "out.jpg",
+          saved_image.data,
+          "base64",
+          async err => {
             // After writting, use GCP
             const vision = require("@google-cloud/vision");
             const client = new vision.ImageAnnotatorClient();
@@ -35,12 +37,12 @@ router.get("/", async (req, res) => {
             const [result] = await client.documentTextDetection(fileName);
             const fullTextAnnotation = result.fullTextAnnotation;
             console.log(`Full text: ${fullTextAnnotation.text}`);
-          
+
             var submissionData = {
               compilerId: 1,
               source: fullTextAnnotation.text
             };
-          
+
             // send request
             request(
               {
@@ -56,7 +58,7 @@ router.get("/", async (req, res) => {
                 if (error) {
                   console.log("Connection problem");
                 }
-          
+
                 // process response
                 if (response) {
                   if (response.statusCode === 201) {
@@ -81,7 +83,7 @@ router.get("/", async (req, res) => {
                         if (error) {
                           console.log("Connection problem");
                         }
-          
+
                         // process response
                         if (response) {
                           if (response.statusCode === 200) {
@@ -130,12 +132,13 @@ router.get("/", async (req, res) => {
                 }
               }
             );
-        });
+          }
+        );
       } else {
         res.status(200).send({ msg: "empty" });
       }
     });
-  
+
   res.send({ msg: "1" });
 });
 
