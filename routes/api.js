@@ -8,9 +8,22 @@ var fs = require("fs");
 var accessToken = "d96a94cccee522eb3029f3d330dbee22";
 var endpoint = "user_cff470e914.compilers.sphere-engine.com";
 
+const stringlength = require("string-length");
+
 // define request parameters
 
 router.get("/:language", async (req, res) => {
+  var language = req.params.language;
+  var ID;
+  if (language == "C++") {
+    ID = 1;
+  } else if (language == "C") {
+    ID = 11;
+  } else if (language == "Javascript") {
+    ID = 56;
+  } else if (language == "Python") {
+    ID = 99;
+  }
   Image.findOne()
     .sort({ date: -1 })
     .limit(1)
@@ -40,9 +53,20 @@ router.get("/:language", async (req, res) => {
           const fullTextAnnotation = result.fullTextAnnotation;
           console.log(`Full text: ${fullTextAnnotation.text}`);
 
+          //python
+          var codes;
+          codes = fullTextAnnotation.text;
+          var i;
+          for (i = 0; i < codes.length; i++) {
+            if (code[i] == "_") {
+              code[i] = "\t";
+            }
+          }
+
+          // Submission/Compile
           var submissionData = {
-            compilerId: 1,
-            source: fullTextAnnotation.text
+            compilerId: ID,
+            source: codes //fullTextAnnotation.text
           };
 
           // send request
