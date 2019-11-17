@@ -10,7 +10,7 @@ var endpoint = "user_cff470e914.compilers.sphere-engine.com";
 
 // define request parameters
 
-router.get("/", async (req, res) => {
+router.get("/:language", async (req, res) => {
   Image.findOne()
     .sort({ date: -1 })
     .limit(1)
@@ -35,6 +35,7 @@ router.get("/", async (req, res) => {
           const client = new vision.ImageAnnotatorClient();
           var stream = "output";
           const fileName = "out.jpg";
+
           const [result] = await client.documentTextDetection(fileName);
           const fullTextAnnotation = result.fullTextAnnotation;
           console.log(`Full text: ${fullTextAnnotation.text}`);
