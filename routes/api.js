@@ -12,6 +12,122 @@ const stringlength = require("string-length");
 
 // define request parameters
 
+router.post("/rerun", async (req, res) => {
+  var language = req.body.language;
+  var code = req.body.code;
+  var ID;
+  if (language == "C++") {
+    ID = 1;
+  } else if (language == "C") {
+    ID = 11;
+  } else if (language == "Javascript") {
+    ID = 56;
+  } else if (language == "Python") {
+    ID = 116;
+  }
+  var submissionData = {
+    compilerId: ID,
+    source: code
+  };
+
+  // send request
+  request(
+    {
+      url:
+        "https://" +
+        endpoint +
+        "/api/v4/submissions?access_token=" +
+        accessToken,
+      method: "POST",
+      form: submissionData
+    },
+    function(error, response, body) {
+      if (error) {
+        console.log("Connection problem");
+      }
+
+      // process response
+      if (response) {
+        if (response.statusCode === 201) {
+          var submissionId = JSON.parse(response.body).id; // submission data in JSON
+          console.log(submissionId);
+          sleep.sleep(5);
+          // send request
+          request(
+            {
+              url:
+                "https://" +
+                endpoint +
+                "/api/v4/submissions/" +
+                submissionId +
+                "/" +
+                stream +
+                "?access_token=" +
+                accessToken,
+              method: "GET"
+            },
+            function(error, response, body) {
+              if (error) {
+                console.log("Connection problem");
+              }
+
+              // process response
+              if (response) {
+                if (response.statusCode === 200) {
+                  console.log(response.body);
+                  res.send({
+                    msg: response.body,
+                    annotation: code
+                  });
+                } else {
+                  if (response.statusCode === 401) {
+                    console.log("Invalid access token");
+                  } else if (response.statusCode === 403) {
+                    console.log("Access denied");
+                  } else if (response.statusCode === 404) {
+                    var body = JSON.parse(response.body);
+                    console.log(
+                      "Non existing resource, error code: " +
+                        body.error_code +
+                        ", details available in the message: " +
+                        body.message
+                    );
+                  } else if (response.statusCode === 400) {
+                    var body = JSON.parse(response.body);
+                    console.log(
+                      "Error code: " +
+                        body.error_code +
+                        ", details available in the message: " +
+                        body.message
+                    );
+                  }
+                  res.status(200).send({
+                    msg: "Compilation error",
+                    annotation: code
+                  });
+                }
+              }
+            }
+          );
+        } else {
+          if (response.statusCode === 401) {
+            console.log("Invalid access token");
+          } else if (response.statusCode === 402) {
+            console.log("Unable to create submission");
+          } else if (response.statusCode === 400) {
+            var body = JSON.parse(response.body);
+            console.log(
+              "Error code: " +
+                body.error_code +
+                ", details available in the message: " +
+                body.message
+            );
+          }
+        }
+      }
+    }
+  );
+});
 router.get("/:language", async (req, res) => {
   var language = req.params.language;
   var ID;
@@ -140,12 +256,10 @@ router.get("/:language", async (req, res) => {
                                   body.message
                               );
                             }
-                            res
-                              .status(200)
-                              .send({
-                                msg: "Compilation error",
-                                annotation: fullTextAnnotation.text
-                              });
+                            res.status(200).send({
+                              msg: "Compilation error",
+                              annotation: fullTextAnnotation.text
+                            });
                           }
                         }
                       }
