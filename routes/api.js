@@ -8,6 +8,8 @@ var fs = require("fs");
 var accessToken = "d96a94cccee522eb3029f3d330dbee22";
 var endpoint = "user_cff470e914.compilers.sphere-engine.com";
 
+const stringlength = require('string-length');
+
 // define request parameters
 
 router.get("/:language", async (req, res) => {
