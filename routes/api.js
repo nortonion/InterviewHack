@@ -114,7 +114,10 @@ router.get("/:language", async (req, res) => {
                         if (response) {
                           if (response.statusCode === 200) {
                             console.log(response.body);
-                            res.send({ msg: response.body });
+                            res.send({
+                              msg: response.body,
+                              annotation: fullTextAnnotation.text
+                            });
                           } else {
                             if (response.statusCode === 401) {
                               console.log("Invalid access token");
