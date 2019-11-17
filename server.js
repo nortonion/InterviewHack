@@ -38,10 +38,8 @@ app.get("/", (req, res) => {
   res.send({ msg: "Hello World" });
 });
 
-mongoose.connect(
-  "mongodb+srv://duyn:meyeu2000@cluster0-jmn7d.mongodb.net/test?retryWrites=true",
-  { useNewUrlParser: true }
-);
+// Enter ur mongodb
+mongoose.connect("", { useNewUrlParser: true });
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log("Running Server at " + port));
