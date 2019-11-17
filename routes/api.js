@@ -70,6 +70,8 @@ router.get("/get_image", (req, res) => {
 router.post("/upload", (req, res) => {
   //res.send({ hello: "world" });
   var formData = req.body;
+  console.log(formData);
+  /*
   var blob = formData.get("data");
   var reader = new FileReader();
   reader.readAsDataURL(blob);
@@ -80,6 +82,8 @@ router.post("/upload", (req, res) => {
       .then(new_image => res.status(200).json(new_image))
       .catch(err => res.status(404).send(err));
   };
+  */
+  res.send("i hate this");
 });
 
 router.post("/", (req, res) => {});
