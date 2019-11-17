@@ -9,12 +9,11 @@ const mongoose = require("mongoose");
 //MiddleWare
 app.use(
   bodyParse.urlencoded({
-    parameterLimit: 100000,
     limit: "50mb",
     extended: true
   })
 );
-app.use(bodyParse.json());
+app.use(bodyParse.json({ limit: "50mb", extended: true }));
 app.use(morgan("dev"));
 
 //Prevent CORS And Allow PUT,POST,DELETE,PATCH,GET
