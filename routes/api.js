@@ -25,7 +25,7 @@ var stream = "output"
 var idnum = 0;
 
 
-  const fileName = path.join(__dirname, 'c++.jpg');
+  const fileName = path.join(__dirname, 'testfinal.png');
   
     //Read a local image as a text document
     const [result] = await client.documentTextDetection(fileName);
@@ -54,10 +54,11 @@ var idnum = 0;
     c++ 1
     c   11
     node.js 56*/
-  
+
+
   var submissionData = {
     compilerId: 1,
-    source: fullTextAnnotation.text
+    source: fullTextAnnotation.text //codes
   };
 
 // send request
