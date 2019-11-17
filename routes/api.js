@@ -61,6 +61,8 @@ router.get("/get_image", (req, res) => {
       if (data) {
         res.status(200).send(data);
         console.log(data);
+      } else {
+        res.status(200).send({ msg: "empty" });
       }
     });
 });
