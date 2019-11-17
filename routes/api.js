@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const Image = require("../schemas/Image");
 const path = require("path");
-//var multer = require("multer");
 
 /*
 router.get("/", async (req, res) => {
@@ -70,22 +69,14 @@ router.get("/get_image", (req, res) => {
 
 router.post("/upload", (req, res) => {
   //res.send({ hello: "world" });
-  //var formData = req.body;
-  console.log(req.body);
-  console.log(req.file);
-  /*
-  var blob = formData.get("data");
-  var reader = new FileReader();
-  reader.readAsDataURL(blob);
-  reader.onloadend = function() {
-    let image = new Image({ data: base64data });
+
+  Image.remove({}, () => {
+    let image = new Image(req.body);
     image
       .save()
-      .then(new_image => res.status(200).json(new_image))
+      .then(new_image => res.status(200).json({ msg: "success" }))
       .catch(err => res.status(404).send(err));
-  };
-  */
-  res.send("i hate this");
+  });
 });
 
 router.post("/", (req, res) => {});
