@@ -1,5 +1,5 @@
 # InterviewHack
-## Devpost: https://trojanhacks-fall-2019.devpost.com/ 
+## Devpost: https://devpost.com/software/how-da-hack-i-can-pass-coding-interview-white-board-hack
 Trojan Hack Fall 2019 Project
 
 This project is made by the following people: Duy Nguyen, Ellie Huang, Norton Kishi, Qingyuan Li
